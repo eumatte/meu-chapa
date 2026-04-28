@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Meu Chapa — Mermaid Collection</title>
 <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=VT323&family=Black+Ops+One&display=swap" rel="stylesheet">
 <style>
@@ -18,7 +18,7 @@ body::after{
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size:200px;
 }
-body{background:var(--black);color:var(--off);font-family:'Space Grotesk',sans-serif;overflow-x:hidden;}
+body{background:var(--black);color:var(--off);font-family:'Space Grotesk',sans-serif;overflow-x:hidden;}html{overflow-x:hidden;max-width:100vw;}
 
 /* ═ ANNOUNCE ═ */
 .announce{background:var(--lime);padding:9px 0;text-align:center;position:relative;z-index:200;}
@@ -32,7 +32,7 @@ nav{position:sticky;top:0;z-index:500;background:rgba(8,8,8,.97);border-bottom:1
 .nav-left{display:flex;gap:28px;list-style:none;}
 .nav-left a,.nav-right a{font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(240,234,214,.4);text-decoration:none;transition:color .2s;}
 .nav-left a:hover,.nav-right a:hover{color:var(--lime);}
-.nav-logo{font-family:'Permanent Marker',cursive;font-size:28px;color:var(--off);text-decoration:none;text-align:center;}
+.nav-logo{font-family:'Permanent Marker',cursive;font-size:28px;color:var(--off);text-decoration:none;text-align:center;white-space:nowrap;}
 .nav-logo em{color:var(--lime);font-style:normal;}
 .nav-right{display:flex;justify-content:flex-end;align-items:center;gap:24px;list-style:none;}
 .nav-wa{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--off);text-decoration:none;border:1px solid var(--border);padding:8px 18px;transition:border-color .2s,color .2s;}
@@ -342,16 +342,18 @@ footer{padding:48px 80px;border-top:1px solid var(--border);display:grid;grid-te
 
 /* ═ MOBILE ═ */
 @media(max-width:768px){
-  .announce-inner{flex-direction:column;gap:4px;padding:8px 16px;}
-  .announce-dot{display:none;}
-  .announce span{font-size:11px;letter-spacing:2px;text-align:center;}
-  .nav-top{grid-template-columns:1fr auto;padding:14px 20px;}
+  html,body{overflow-x:hidden;max-width:100vw;}
+  .announce{overflow:hidden;}
+  .announce-inner{gap:0;padding:0;}
+  .announce span:not(:first-child){display:none;}
+  .announce span{font-size:11px;letter-spacing:2px;text-align:center;width:100%;padding:10px 16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .nav-top{grid-template-columns:auto 1fr;padding:12px 16px;gap:12px;}
   .nav-left,.nav-right{display:none;}
-  .nav-logo{text-align:left;font-size:22px;}
-  .hamburger{display:flex;}
+  .nav-logo{font-size:20px;white-space:nowrap;text-align:left;}
+  .hamburger{display:flex;margin-left:auto;}
   .nav-cats{overflow-x:auto;justify-content:flex-start;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
   .nav-cats::-webkit-scrollbar{display:none;}
-  .nav-cat{padding:10px 18px;font-size:9px;letter-spacing:2px;white-space:nowrap;flex-shrink:0;}
+  .nav-cat{padding:10px 16px;font-size:9px;letter-spacing:2px;white-space:nowrap;flex-shrink:0;}
   .hero{aspect-ratio:9/16;max-height:90vh;}
   .hero-content{padding:0 20px 40px;}
   .hero-eyebrow{font-size:11px;letter-spacing:4px;margin-bottom:10px;}
@@ -363,9 +365,10 @@ footer{padding:48px 80px;border-top:1px solid var(--border);display:grid;grid-te
   .hero-dots{bottom:16px;}
   .tape-item{font-size:10px;letter-spacing:3px;padding:0 24px;}
   .countdown{padding:40px 20px;}
-  .cd-blocks{gap:8px;}
-  .cd-num{font-size:clamp(36px,10vw,56px);min-width:60px;}
-  .cd-sep{font-size:clamp(28px,8vw,44px);}
+  .cd-blocks{gap:4px;flex-wrap:nowrap;}
+  .cd-block{flex:1;}
+  .cd-num{font-size:clamp(28px,8vw,48px);min-width:0;}
+  .cd-sep{font-size:clamp(20px,6vw,36px);margin-top:4px;}
   .cd-title{font-size:18px;margin-bottom:20px;}
   .col-header{flex-direction:column;align-items:flex-start;gap:12px;padding:48px 20px 32px;}
   .col-title{font-size:clamp(40px,10vw,64px);}
@@ -453,7 +456,7 @@ footer{padding:48px 80px;border-top:1px solid var(--border);display:grid;grid-te
     <a class="nav-cat" href="./tshirt.html">T-Shirts</a>
     <a class="nav-cat" href="./shorts.html">Shorts</a>
     <a class="nav-cat" href="./cap.html">Headwear</a>
-    <a class="nav-cat" href="./meias.html">Acessórios</a>
+    <a class="nav-cat" href="./acessorios.html">Acessórios</a>
   </div>
 </nav>
 
