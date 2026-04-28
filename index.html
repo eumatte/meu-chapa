@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meu Chapa — Mermaid Collection</title>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=VT323&family=Black+Ops+One&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:#080808;--gray:#111;--mid:#1c1c1c;--border:#242424;
+  --off:#F0EAD6;--cream:#E2D5B8;--lime:#9DC832;--green:#243D1A;
+  --red:#8B0000;--gold:#C8A84B;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:8000;opacity:.055;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px;
+}
+body{background:var(--black);color:var(--off);font-family:'Space Grotesk',sans-serif;overflow-x:hidden;}
+
+/* ═ ANNOUNCE ═ */
+.announce{background:var(--lime);padding:9px 0;text-align:center;position:relative;z-index:200;}
+.announce-inner{display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap;padding:0 16px;}
+.announce span{font-family:'VT323',monospace;font-size:14px;letter-spacing:4px;text-transform:uppercase;color:var(--black);}
+.announce-dot{font-size:8px;opacity:.5;}
+
+/* ═ NAV ═ */
+nav{position:sticky;top:0;z-index:500;background:rgba(8,8,8,.97);border-bottom:1px solid var(--border);}
+.nav-top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:20px 48px;}
+.nav-left{display:flex;gap:28px;list-style:none;}
+.nav-left a,.nav-right a{font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(240,234,214,.4);text-decoration:none;transition:color .2s;}
+.nav-left a:hover,.nav-right a:hover{color:var(--lime);}
+.nav-logo{font-family:'Permanent Marker',cursive;font-size:28px;color:var(--off);text-decoration:none;text-align:center;}
+.nav-logo em{color:var(--lime);font-style:normal;}
+.nav-right{display:flex;justify-content:flex-end;align-items:center;gap:24px;list-style:none;}
+.nav-wa{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--off);text-decoration:none;border:1px solid var(--border);padding:8px 18px;transition:border-color .2s,color .2s;}
+.nav-wa:hover{border-color:var(--lime);color:var(--lime);}
+.nav-cats{border-top:1px solid var(--border);display:flex;justify-content:center;}
+.nav-cat{font-size:10px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:rgba(240,234,214,.35);text-decoration:none;padding:12px 32px;border-right:1px solid var(--border);transition:color .2s,background .2s;}
+.nav-cat:first-child{border-left:1px solid var(--border);}
+.nav-cat:hover,.nav-cat.active{color:var(--lime);background:rgba(157,200,50,.04);}
+
+/* ═ HERO 21:9 ═ */
+.hero{position:relative;width:100%;aspect-ratio:21/9;overflow:hidden;background:var(--black);max-height:100vh;}
+.hero-slides{position:absolute;inset:0;}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s cubic-bezier(.4,0,.2,1);}
+.hero-slide.active{opacity:1;}
+.hero-slide img{width:100%;height:100%;object-fit:cover;filter:brightness(.7) contrast(1.1) saturate(.85);}
+.hero::before,.hero::after{content:'';position:absolute;left:0;right:0;height:10%;z-index:3;pointer-events:none;}
+.hero::before{top:0;background:linear-gradient(to bottom,rgba(8,8,8,.9),transparent);}
+.hero::after{bottom:0;background:linear-gradient(to top,rgba(8,8,8,1) 0%,rgba(8,8,8,.4) 60%,transparent 100%);}
+.hero-vignette{position:absolute;inset:0;z-index:2;background:linear-gradient(to right,rgba(8,8,8,.5) 0%,transparent 20%,transparent 80%,rgba(8,8,8,.5) 100%);}
+.hero-content{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;justify-content:flex-end;padding:4% 6% 5%;}
+.hero-eyebrow{font-family:'VT323',monospace;font-size:16px;letter-spacing:8px;color:var(--lime);opacity:.8;text-transform:uppercase;margin-bottom:16px;animation:fadein .8s ease .3s both;}
+.hero-title{font-family:'Permanent Marker',cursive;font-size:clamp(48px,8vw,120px);line-height:.85;color:var(--off);animation:slidein 1s cubic-bezier(.16,1,.3,1) both;max-width:700px;}
+.hero-title em{font-style:normal;-webkit-text-stroke:2px var(--lime);color:transparent;}
+.hero-sub{display:flex;justify-content:space-between;align-items:flex-end;margin-top:28px;animation:fadein 1s ease .4s both;}
+.hero-desc{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.5vw,22px);font-style:italic;color:rgba(240,234,214,.55);max-width:380px;line-height:1.6;}
+.hero-actions{display:flex;gap:12px;align-items:center;}
+.btn-primary{display:inline-block;padding:14px 40px;background:var(--lime);color:var(--black);font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;text-decoration:none;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);transition:background .2s,transform .15s;}
+.btn-primary:hover{background:#b8e038;transform:translateY(-2px);}
+.btn-outline{display:inline-block;padding:13px 32px;border:1px solid rgba(240,234,214,.2);color:rgba(240,234,214,.7);font-size:11px;font-weight:500;letter-spacing:4px;text-transform:uppercase;text-decoration:none;transition:border-color .2s,color .2s;}
+.btn-outline:hover{border-color:var(--lime);color:var(--lime);}
+.hero-dots{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:5;display:flex;gap:8px;}
+.hero-dot{width:20px;height:2px;background:rgba(240,234,214,.2);transition:background .3s,width .3s;cursor:pointer;}
+.hero-dot.active{background:var(--lime);width:40px;}
+
+/* ═ TAPE ═ */
+.tape{overflow:hidden;background:var(--lime);padding:11px 0;border-top:2px solid rgba(0,0,0,.3);}
+.tape-inner{display:flex;white-space:nowrap;animation:tape 22s linear infinite;}
+.tape-item{font-family:'Black Ops One',cursive;font-size:12px;letter-spacing:5px;color:var(--black);padding:0 40px;flex-shrink:0;text-transform:uppercase;}
+.tape-sep{color:rgba(0,0,0,.3);margin:0 8px;}
+
+/* ═ COLLECTION HEADER ═ */
+.col-header{padding:100px 80px 64px;display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--border);}
+.col-label{font-family:'VT323',monospace;font-size:14px;letter-spacing:6px;color:var(--lime);text-transform:uppercase;margin-bottom:12px;}
+.col-title{font-family:'Permanent Marker',cursive;font-size:clamp(48px,6vw,88px);line-height:.88;color:var(--off);}
+.col-title em{font-style:normal;color:var(--lime);}
+.col-meta{text-align:right;display:flex;flex-direction:column;gap:8px;align-items:flex-end;}
+.col-meta-num{font-family:'Black Ops One',cursive;font-size:64px;color:rgba(157,200,50,.1);line-height:1;}
+.col-meta-tag{font-family:'VT323',monospace;font-size:13px;letter-spacing:4px;color:rgba(240,234,214,.3);text-transform:uppercase;}
+
+/* ═ PRODUCTS ═ */
+.products{padding:3px 3px 80px;}
+.prod-grid-featured{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3px;margin-bottom:3px;}
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;}
+.prod-card{position:relative;overflow:hidden;background:var(--gray);aspect-ratio:3/4;}
+.prod-card.wide{aspect-ratio:unset;}
+.prod-card img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1),filter .5s;filter:saturate(.8) contrast(1.05);}
+.prod-card:hover img{transform:scale(1.04);filter:saturate(1);}
+
+/* product overlay with sizes */
+.prod-card-info{
+  position:absolute;bottom:0;left:0;right:0;padding:20px;
+  background:linear-gradient(to top,rgba(8,8,8,.98) 0%,rgba(8,8,8,.6) 70%,transparent 100%);
+  transform:translateY(100%);opacity:0;
+  transition:opacity .4s,transform .4s;
+}
+.prod-card:hover .prod-card-info{opacity:1;transform:translateY(0);}
+.prod-cat{font-family:'VT323',monospace;font-size:12px;letter-spacing:4px;color:var(--lime);text-transform:uppercase;margin-bottom:4px;}
+.prod-name{font-family:'Black Ops One',cursive;font-size:18px;letter-spacing:1px;color:var(--off);margin-bottom:12px;}
+.prod-sizes{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;}
+.sz{
+  width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(240,234,214,.2);color:rgba(240,234,214,.5);
+  font-size:10px;font-weight:700;letter-spacing:1px;
+  transition:all .2s;cursor:pointer;background:transparent;
+}
+.sz:hover,.sz.sel{border-color:var(--lime);color:var(--lime);background:rgba(157,200,50,.1);}
+.sz.uno{width:auto;padding:0 12px;letter-spacing:2px;}
+.prod-footer-row{display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.prod-price{font-family:'Black Ops One',cursive;font-size:20px;color:var(--gold);}
+.prod-buy{
+  flex:1;padding:10px 16px;background:var(--lime);color:var(--black);
+  font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  border:none;cursor:pointer;transition:background .2s;text-decoration:none;
+  display:flex;align-items:center;justify-content:center;
+}
+.prod-buy:hover{background:#b8e038;}
+.prod-num{position:absolute;top:16px;left:18px;font-family:'VT323',monospace;font-size:14px;color:rgba(157,200,50,.5);letter-spacing:3px;}
+.prod-badge{position:absolute;top:16px;right:16px;background:var(--red);color:var(--off);font-family:'VT323',monospace;font-size:12px;letter-spacing:3px;padding:4px 12px;transform:rotate(2deg);}
+
+/* ═ MANIFESTO ═ */
+.manifesto{position:relative;overflow:hidden;padding:140px 80px;background:var(--green);text-align:center;}
+.manifesto::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(8,8,8,.3) 1px,transparent 1px);background-size:20px 20px;}
+.texugo-wrap{position:relative;z-index:1;display:inline-block;margin-bottom:40px;animation:texugo-enter 1s cubic-bezier(.16,1,.3,1) both;}
+.texugo-img{width:160px;height:160px;border-radius:50%;object-fit:cover;border:3px solid var(--lime);animation:float 3.5s ease-in-out infinite,wiggle 6s ease-in-out infinite;filter:drop-shadow(0 0 24px rgba(157,200,50,.35));}
+.texugo-bubble{position:absolute;top:-18px;right:-150px;background:var(--lime);color:var(--black);font-family:'Permanent Marker',cursive;font-size:14px;padding:8px 18px;border-radius:20px 20px 20px 4px;white-space:nowrap;box-shadow:3px 3px 0 rgba(0,0,0,.3);animation:bubble-pop .6s cubic-bezier(.16,1,.3,1) 1.2s both;opacity:0;}
+.texugo-bubble::before{content:'';position:absolute;bottom:-8px;left:14px;border:8px solid transparent;border-top-color:var(--lime);border-bottom:none;}
+.manifesto-q{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,58px);font-style:italic;color:var(--off);line-height:1.35;position:relative;z-index:1;max-width:800px;margin:0 auto 24px;}
+.manifesto-q strong{font-style:normal;color:var(--lime);font-family:'Permanent Marker',cursive;font-size:.8em;}
+.manifesto-by{font-family:'VT323',monospace;font-size:14px;letter-spacing:6px;color:rgba(240,234,214,.4);text-transform:uppercase;position:relative;z-index:1;}
+
+/* ═ ABOUT ═ */
+.about{display:grid;grid-template-columns:1fr 1fr;min-height:80vh;}
+.about-visual{position:relative;overflow:hidden;background:var(--gray);}
+.about-visual img{width:100%;height:100%;object-fit:cover;opacity:.75;filter:saturate(.7);}
+.about-visual-overlay{position:absolute;inset:0;background:linear-gradient(to right,transparent 60%,var(--black) 100%);}
+.stk{position:absolute;font-family:'Permanent Marker',cursive;padding:8px 20px;font-size:13px;z-index:2;box-shadow:4px 4px 0 rgba(0,0,0,.5);}
+.stk-1{top:40px;left:32px;background:var(--lime);color:var(--black);transform:rotate(-7deg);}
+.stk-2{bottom:100px;left:40px;background:#8B0000;color:var(--off);transform:rotate(4deg);}
+.stk-3{top:45%;left:45%;transform:translate(-50%,-50%) rotate(-2deg);background:var(--off);color:var(--black);}
+.about-text{padding:80px 72px;display:flex;flex-direction:column;justify-content:center;background:var(--black);position:relative;}
+.about-text::before{content:'';position:absolute;top:0;left:0;width:2px;height:100%;background:linear-gradient(to bottom,transparent,var(--lime),transparent);opacity:.3;}
+.about-body{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;line-height:1.9;color:rgba(240,234,214,.6);margin:28px 0 48px;max-width:440px;}
+.about-body strong{font-style:normal;color:var(--lime);font-family:'Space Grotesk',sans-serif;font-size:.85em;font-weight:700;}
+.about-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.atag{font-family:'VT323',monospace;font-size:14px;letter-spacing:3px;text-transform:uppercase;padding:7px 18px;border:1px solid rgba(157,200,50,.25);color:rgba(157,200,50,.7);transition:all .2s;cursor:pointer;}
+.atag:hover{background:var(--lime);color:var(--black);border-color:var(--lime);}
+
+/* ═ LOOKBOOK ═ */
+.lookbook{padding:80px 3px 3px;}
+.look-header{padding:0 80px 48px;}
+.look-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;grid-template-rows:auto auto;gap:3px;}
+.look-card{position:relative;overflow:hidden;background:var(--gray);}
+.look-card.tall{grid-row:span 2;}
+.look-card img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.16,1,.3,1);filter:saturate(.7) contrast(1.1);}
+.look-card:hover img{transform:scale(1.05);filter:saturate(.95);}
+.look-label{position:absolute;bottom:0;left:0;right:0;padding:20px;background:linear-gradient(to top,rgba(8,8,8,.9),transparent);font-family:'VT323',monospace;font-size:13px;letter-spacing:4px;color:var(--lime);text-transform:uppercase;opacity:0;transform:translateY(6px);transition:all .3s;}
+.look-card:hover .look-label{opacity:1;transform:translateY(0);}
+
+/* ═ NEWSLETTER ═ */
+.newsletter{padding:120px 80px;text-align:center;position:relative;background:radial-gradient(ellipse at center,rgba(36,61,26,.4) 0%,transparent 70%);}
+.newsletter::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--lime));}
+.nl-eyebrow{font-family:'VT323',monospace;font-size:14px;letter-spacing:6px;color:var(--lime);text-transform:uppercase;margin-bottom:16px;}
+.nl-title{font-family:'Permanent Marker',cursive;font-size:clamp(44px,6vw,80px);line-height:.88;color:var(--off);margin-bottom:16px;}
+.nl-title em{font-style:normal;color:var(--lime);}
+.nl-sub{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:rgba(240,234,214,.45);margin-bottom:48px;max-width:380px;margin-left:auto;margin-right:auto;line-height:1.7;}
+.nl-form{display:flex;max-width:440px;margin:0 auto;}
+.nl-input{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--border);border-right:none;padding:15px 24px;color:var(--off);font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:1px;outline:none;transition:border-color .2s;}
+.nl-input::placeholder{opacity:.3;}
+.nl-input:focus{border-color:var(--lime);}
+.nl-btn{background:var(--lime);border:none;padding:15px 32px;color:var(--black);font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:background .2s;}
+.nl-btn:hover{background:#b8e038;}
+
+/* ═ FOOTER ═ */
+footer{padding:48px 80px;border-top:1px solid var(--border);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:40px;}
+.footer-logo{font-family:'Permanent Marker',cursive;font-size:28px;color:var(--off);}
+.footer-logo em{color:var(--lime);font-style:normal;}
+.footer-links{display:flex;gap:0;justify-content:center;list-style:none;}
+.footer-links a{font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(240,234,214,.25);text-decoration:none;padding:0 20px;border-right:1px solid var(--border);transition:color .2s;}
+.footer-links li:last-child a{border-right:none;}
+.footer-links a:hover{color:var(--lime);}
+.footer-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;}
+.footer-copy{font-family:'VT323',monospace;font-size:13px;color:rgba(240,234,214,.2);letter-spacing:3px;}
+.footer-made{font-size:10px;color:rgba(240,234,214,.15);letter-spacing:2px;}
+
+/* ═ SCROLL REVEAL ═ */
+.r{opacity:0;transform:translateY(32px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);}
+.r.on{opacity:1;transform:translateY(0);}
+.r2{transition-delay:.1s;}.r3{transition-delay:.2s;}.r4{transition-delay:.3s;}
+
+/* ═ KEYFRAMES ═ */
+@keyframes slidein{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+@keyframes tape{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes wiggle{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+@keyframes texugo-enter{from{opacity:0;transform:translateX(-80px) rotate(-10deg)}to{opacity:1;transform:translateX(0) rotate(0deg)}}
+@keyframes bubble-pop{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+
+/* ═ MODAL TAMANHOS ═ */
+.modal-overlay{position:fixed;inset:0;background:rgba(8,8,8,.85);z-index:2000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--gray);border:1px solid var(--border);padding:40px;max-width:420px;width:90%;position:relative;}
+.modal-close{position:absolute;top:16px;right:16px;background:none;border:none;color:rgba(240,234,214,.4);font-size:20px;cursor:pointer;transition:color .2s;}
+.modal-close:hover{color:var(--lime);}
+.modal-label{font-family:'VT323',monospace;font-size:13px;letter-spacing:5px;color:var(--lime);text-transform:uppercase;margin-bottom:8px;}
+.modal-name{font-family:'Black Ops One',cursive;font-size:28px;color:var(--off);margin-bottom:4px;}
+.modal-price{font-family:'Black Ops One',cursive;font-size:20px;color:var(--gold);margin-bottom:24px;}
+.modal-size-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,234,214,.4);margin-bottom:12px;}
+.modal-sizes{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap;}
+.msz{width:48px;height:48px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);color:rgba(240,234,214,.5);font-size:12px;font-weight:700;letter-spacing:1px;transition:all .2s;cursor:pointer;background:transparent;}
+.msz:hover,.msz.sel{border-color:var(--lime);color:var(--lime);background:rgba(157,200,50,.1);}
+.msz.uno{width:auto;padding:0 16px;letter-spacing:2px;}
+.modal-wa{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;background:#25D366;color:#fff;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;transition:background .2s;}
+.modal-wa:hover{background:#1ebe5a;}
+.modal-wa svg{width:18px;height:18px;fill:white;}
+
+/* ═ PRODUCT DETAIL ═ */
+.prod-detail{display:grid;grid-template-columns:1fr 1fr;min-height:80vh;border-bottom:1px solid var(--border);}
+.pd-gallery{display:grid;grid-template-columns:80px 1fr;background:var(--gray);}
+.pd-main{overflow:hidden;position:relative;}
+.pd-main img{width:100%;height:100%;object-fit:cover;transition:opacity .3s;}
+.pd-thumbs{display:flex;flex-direction:column;gap:3px;padding:3px 0 3px 3px;background:var(--black);}
+.pd-thumb{width:77px;height:77px;overflow:hidden;cursor:pointer;opacity:.45;transition:opacity .2s;border:1px solid transparent;}
+.pd-thumb.active,.pd-thumb:hover{opacity:1;border-color:var(--lime);}
+.pd-thumb img{width:100%;height:100%;object-fit:cover;}
+.pd-info{padding:64px;display:flex;flex-direction:column;justify-content:center;background:var(--black);border-left:1px solid var(--border);}
+.pd-name{font-family:'Black Ops One',cursive;font-size:clamp(28px,3.5vw,52px);line-height:.9;color:var(--off);margin:8px 0 16px;letter-spacing:1px;}
+.pd-price{font-family:'Black Ops One',cursive;font-size:28px;color:var(--gold);margin-bottom:24px;}
+.pd-desc{font-size:14px;line-height:1.85;color:rgba(240,234,214,.55);margin-bottom:28px;max-width:400px;}
+.pd-spec-list{display:flex;flex-direction:column;gap:0;margin-bottom:28px;border-top:1px solid var(--border);}
+.pd-spec{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.pd-spec span:first-child{color:rgba(240,234,214,.35);letter-spacing:2px;text-transform:uppercase;font-family:'VT323',monospace;font-size:13px;}
+.pd-spec span:last-child{color:var(--off);font-weight:500;}
+.pd-size-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,234,214,.4);margin-bottom:12px;}
+.pd-sizes{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+@media(max-width:900px){
+  .prod-detail{grid-template-columns:1fr;}
+  .pd-gallery{grid-template-columns:60px 1fr;min-height:60vw;}
+  .pd-thumb{width:57px;height:57px;}
+  .pd-info{padding:32px 24px;}
+  #prod-acessorios>div:last-child{grid-template-columns:1fr;}
+}
+
+/* ═ WA FLOAT ═ */
+.wa-float{position:fixed;bottom:28px;right:28px;z-index:1000;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .2s,box-shadow .2s;text-decoration:none;}
+.wa-float:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,.6);}
+.wa-float svg{width:28px;height:28px;fill:white;}
+.wa-float-pulse{position:absolute;inset:0;border-radius:50%;background:#25D366;animation:wapulse 2s ease-out infinite;}
+@keyframes wapulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.7);opacity:0}}
+
+/* ═ COUNTDOWN ═ */
+.countdown{background:var(--black);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:48px 80px;text-align:center;}
+.cd-label{font-family:'VT323',monospace;font-size:14px;letter-spacing:6px;color:var(--lime);text-transform:uppercase;margin-bottom:8px;}
+.cd-title{font-family:'Permanent Marker',cursive;font-size:clamp(20px,3vw,32px);color:var(--off);margin-bottom:32px;}
+.cd-blocks{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;}
+.cd-block{display:flex;flex-direction:column;align-items:center;gap:8px;}
+.cd-num{font-family:'Black Ops One',cursive;font-size:clamp(48px,7vw,88px);color:var(--lime);line-height:1;min-width:100px;text-align:center;}
+.cd-unit{font-family:'VT323',monospace;font-size:13px;letter-spacing:4px;color:rgba(240,234,214,.35);text-transform:uppercase;}
+.cd-sep{font-family:'Black Ops One',cursive;font-size:clamp(40px,6vw,72px);color:rgba(157,200,50,.2);line-height:1;align-self:flex-start;margin-top:8px;}
+
+/* ═ TABELA MEDIDAS ═ */
+.modal-tabs{display:flex;gap:0;margin-bottom:24px;border:1px solid var(--border);}
+.modal-tab{flex:1;padding:10px;font-family:'VT323',monospace;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,234,214,.35);background:none;border:none;cursor:pointer;transition:all .2s;border-right:1px solid var(--border);}
+.modal-tab:last-child{border-right:none;}
+.modal-tab.active{background:rgba(157,200,50,.1);color:var(--lime);}
+.medidas-table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:13px;}
+.medidas-table th{font-family:'VT323',monospace;letter-spacing:3px;text-transform:uppercase;color:var(--lime);font-size:12px;padding:10px 8px;border-bottom:1px solid var(--border);text-align:center;}
+.medidas-table td{padding:10px 8px;border-bottom:1px solid rgba(255,255,255,.05);text-align:center;color:rgba(240,234,214,.7);}
+.medidas-table tr:last-child td{border-bottom:none;}
+.medidas-note{font-size:11px;color:rgba(240,234,214,.3);letter-spacing:1px;line-height:1.6;}
+
+/* ═ PIX ═ */
+.pix-box{background:rgba(157,200,50,.06);border:1px solid rgba(157,200,50,.2);padding:16px;margin:16px 0;display:flex;flex-direction:column;gap:8px;}
+.pix-label{font-family:'VT323',monospace;font-size:12px;letter-spacing:4px;color:var(--lime);text-transform:uppercase;}
+.pix-key{font-size:14px;font-weight:600;color:var(--off);letter-spacing:1px;word-break:break-all;}
+.pix-copy{background:var(--lime);border:none;color:var(--black);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:8px 16px;cursor:pointer;align-self:flex-start;margin-top:4px;transition:background .2s;}
+.pix-copy:hover{background:#b8e038;}
+.pix-note{font-size:11px;color:rgba(240,234,214,.35);letter-spacing:1px;line-height:1.6;margin-top:4px;}
+.modal-divider{display:flex;align-items:center;gap:12px;margin:16px 0;color:rgba(240,234,214,.2);font-size:11px;letter-spacing:3px;text-transform:uppercase;}
+.modal-divider::before,.modal-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* ═ HAMBURGER ═ */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;}
+.hamburger span{display:block;width:24px;height:2px;background:var(--off);transition:all .3s;}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(8,8,8,.98);z-index:800;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{font-family:'Permanent Marker',cursive;font-size:clamp(32px,8vw,56px);color:var(--off);text-decoration:none;transition:color .2s;}
+.mobile-menu a:hover{color:var(--lime);}
+
+/* ═ NEWSLETTER POPUP ═ */
+.nl-popup{position:fixed;inset:0;background:rgba(8,8,8,.85);z-index:3000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+.nl-popup.open{display:flex;}
+.nl-popup-box{background:var(--gray);border:1px solid var(--border);padding:48px 40px;max-width:440px;width:90%;position:relative;text-align:center;}
+.nl-popup-close{position:absolute;top:16px;right:16px;background:none;border:none;color:rgba(240,234,214,.3);font-size:20px;cursor:pointer;transition:color .2s;}
+.nl-popup-close:hover{color:var(--lime);}
+.nl-popup-texugo{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--lime);margin-bottom:16px;}
+.nl-popup-title{font-family:'Permanent Marker',cursive;font-size:32px;color:var(--off);margin-bottom:8px;}
+.nl-popup-title em{color:var(--lime);font-style:normal;}
+.nl-popup-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(240,234,214,.5);margin-bottom:24px;line-height:1.6;}
+.nl-popup-form{display:flex;flex-direction:column;gap:8px;}
+.nl-popup-input{background:rgba(255,255,255,.04);border:1px solid var(--border);padding:14px 20px;color:var(--off);font-family:'Space Grotesk',sans-serif;font-size:13px;outline:none;transition:border-color .2s;}
+.nl-popup-input:focus{border-color:var(--lime);}
+.nl-popup-btn{background:var(--lime);border:none;padding:14px;color:var(--black);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:background .2s;}
+.nl-popup-btn:hover{background:#b8e038;}
+.nl-popup-skip{font-size:11px;color:rgba(240,234,214,.2);letter-spacing:2px;margin-top:12px;cursor:pointer;transition:color .2s;background:none;border:none;}
+.nl-popup-skip:hover{color:rgba(240,234,214,.5);}
+
+/* ═ REVIEWS ═ */
+.reviews{padding:100px 80px;background:var(--gray);}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:48px;}
+.review-card{background:var(--mid);padding:32px;display:flex;flex-direction:column;gap:16px;}
+.review-stars{color:var(--gold);font-size:16px;letter-spacing:4px;}
+.review-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:rgba(240,234,214,.7);line-height:1.7;}
+.review-author{display:flex;align-items:center;gap:12px;margin-top:auto;}
+.review-avatar{width:40px;height:40px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:'Permanent Marker',cursive;font-size:16px;color:var(--lime);}
+.review-name{font-size:13px;font-weight:600;color:var(--off);letter-spacing:1px;}
+.review-loc{font-family:'VT323',monospace;font-size:12px;color:rgba(240,234,214,.3);letter-spacing:2px;}
+
+/* ═ FAQ ═ */
+.faq{padding:100px 80px;}
+.faq-list{margin-top:48px;display:flex;flex-direction:column;gap:3px;}
+.faq-item{background:var(--gray);border:1px solid var(--border);}
+.faq-q{width:100%;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;background:none;border:none;color:var(--off);font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;text-align:left;cursor:pointer;transition:color .2s;letter-spacing:.3px;}
+.faq-q:hover{color:var(--lime);}
+.faq-icon{font-size:20px;color:var(--lime);transition:transform .3s;flex-shrink:0;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1);}
+.faq-item.open .faq-a{max-height:200px;}
+.faq-a-inner{padding:0 24px 20px;font-size:14px;line-height:1.8;color:rgba(240,234,214,.55);}
+
+/* ═ MEDIDAS LINK ═ */
+.medidas-link{font-family:'VT323',monospace;font-size:12px;letter-spacing:3px;color:rgba(157,200,50,.6);text-transform:uppercase;background:none;border:none;cursor:pointer;text-decoration:underline;margin-bottom:8px;display:block;text-align:left;}
+.medidas-link:hover{color:var(--lime);}
+
+/* ═ MOBILE ═ */
+@media(max-width:900px){
+  .hamburger{display:flex;}
+  .nav-left,.nav-right{display:none;}
+  .reviews-grid{grid-template-columns:1fr;}
+  .faq{padding:80px 24px;}
+  .reviews{padding:80px 24px;}
+  .countdown{padding:48px 24px;}
+  .cd-blocks{gap:12px;}
+  .cd-num{min-width:70px;font-size:clamp(36px,10vw,64px);}
+  .wa-float{bottom:20px;right:20px;}
+  .hero{aspect-ratio:4/3;max-height:70vh;}
+  .hero-title{font-size:clamp(40px,10vw,72px);}
+  .hero-sub{flex-direction:column;align-items:flex-start;gap:20px;}
+  .col-header{flex-direction:column;align-items:flex-start;gap:16px;padding:60px 24px 40px;}
+  .prod-grid-featured,.prod-grid{grid-template-columns:1fr 1fr;}
+  .manifesto{padding:80px 24px;}
+  .texugo-bubble{right:-120px;font-size:12px;}
+  .about{grid-template-columns:1fr;}
+  .about-visual{min-height:50vw;}
+  .about-text{padding:48px 24px;}
+  .look-grid{grid-template-columns:1fr 1fr;}
+  .look-card.tall{grid-row:span 1;}
+  .newsletter{padding:80px 24px;}
+  footer{grid-template-columns:1fr;text-align:center;padding:40px 24px;}
+  .footer-right{align-items:center;}
+  .footer-links{flex-wrap:wrap;justify-content:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCE -->
+<div class="announce">
+  <div class="announce-inner">
+    <span>☽ Mermaid Collection — Drop 001 Disponível Agora ☽</span>
+    <span class="announce-dot">✺</span>
+    <span>Frete grátis acima de R$300</span>
+    <span class="announce-dot">✺</span>
+    <span>Edição Limitada</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-top">
+    <ul class="nav-left">
+      <li><a href="#colecao">Coleção</a></li>
+      <li><a href="#lookbook">Lookbook</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+    </ul>
+    <a class="nav-logo" href="#">Meu <em>Chapa</em></a>
+    <ul class="nav-right">
+      <li><a href="https://www.instagram.com/meuchapa_original" target="_blank">Instagram</a></li>
+      <li><a href="https://wa.me/5521973094704" target="_blank" class="nav-wa">WhatsApp</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-cats">
+    <a class="nav-cat active" href="#colecao">Mermaid Collection</a>
+    <a class="nav-cat" href="./tshirt.html">T-Shirts</a>
+    <a class="nav-cat" href="./shorts.html">Shorts</a>
+    <a class="nav-cat" href="./cap.html">Headwear</a>
+    <a class="nav-cat" href="./meias.html">Acessórios</a>
+  </div>
+</nav>
+
+<!-- HERO 21:9 -->
+<section class="hero">
+  <div class="hero-slides">
+    <div class="hero-slide active"><img src="./images/banner1.png" alt="Mermaid Collection"></div>
+    <div class="hero-slide"><img src="./images/banner2.png" alt="Mermaid Collection"></div>
+    <div class="hero-slide"><img src="./images/banner3.png" alt="Mermaid Collection"></div>
+    <div class="hero-slide"><img src="./images/banner4.png" alt="Mermaid Collection"></div>
+    <div class="hero-slide"><img src="./images/banner5.png" alt="Mermaid Collection"></div>
+    <div class="hero-slide"><img src="./images/banner6.png" alt="Mermaid Collection"></div>
+  </div>
+  <div class="hero-vignette"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">☽ Drop 001 · Rio de Janeiro · 2026 ☽</div>
+    <h1 class="hero-title">Mermaid<br><em>Collection</em></h1>
+    <div class="hero-sub">
+      <p class="hero-desc">E aí, meu chapa? Relaxa, senta e vê o que chegou.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#colecao">Ver Coleção</a>
+        <a class="btn-outline" href="#sobre">A Marca</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-dots">
+    <div class="hero-dot active" data-slide="0"></div>
+    <div class="hero-dot" data-slide="1"></div>
+    <div class="hero-dot" data-slide="2"></div>
+    <div class="hero-dot" data-slide="3"></div>
+    <div class="hero-dot" data-slide="4"></div>
+    <div class="hero-dot" data-slide="5"></div>
+  </div>
+</section>
+
+<!-- TAPE -->
+<div class="tape">
+  <div class="tape-inner">
+    <span class="tape-item">E aí, Meu Chapa?</span><span class="tape-sep">✺</span>
+    <span class="tape-item">Mermaid Collection</span><span class="tape-sep">✺</span>
+    <span class="tape-item">Drop 001</span><span class="tape-sep">✺</span>
+    <span class="tape-item">Rio de Janeiro</span><span class="tape-sep">✺</span>
+    <span class="tape-item">Tá de Boa</span><span class="tape-sep">✺</span>
+    <span class="tape-item">Edição Limitada</span><span class="tape-sep">✺</span>
+    <span class="tape-item">Carioca</span><span class="tape-sep">✺</span>
+    <span class="tape-item">Streetwear</span><span class="tape-sep">✺</span>
+    <span class="tape-item">E aí, Meu Chapa?</span><span class="tape-sep">✺</span>
+    <span class="tape-item">Mermaid Collection</span><span class="tape-sep">✺</span>
+    <span class="tape-item">Drop 001</span><span class="tape-sep">✺</span>
+    <span class="tape-item">Rio de Janeiro</span><span class="tape-sep">✺</span>
+    <span class="tape-item">Tá de Boa</span><span class="tape-sep">✺</span>
+    <span class="tape-item">Edição Limitada</span><span class="tape-sep">✺</span>
+    <span class="tape-item">Carioca</span><span class="tape-sep">✺</span>
+    <span class="tape-item">Streetwear</span><span class="tape-sep">✺</span>
+  </div>
+</div>
+
+<!-- COUNTDOWN -->
+<section class="countdown">
+  <div class="cd-label r">☽ Drop 001 Encerra Em ☽</div>
+  <div class="cd-title r r2">Corre, Meu Chapa — Estoque Limitado</div>
+  <div class="cd-blocks">
+    <div class="cd-block r r2">
+      <div class="cd-num" id="cd-days">07</div>
+      <div class="cd-unit">Dias</div>
+    </div>
+    <div class="cd-sep r r2">:</div>
+    <div class="cd-block r r3">
+      <div class="cd-num" id="cd-hours">00</div>
+      <div class="cd-unit">Horas</div>
+    </div>
+    <div class="cd-sep r r3">:</div>
+    <div class="cd-block r r4">
+      <div class="cd-num" id="cd-mins">00</div>
+      <div class="cd-unit">Minutos</div>
+    </div>
+    <div class="cd-sep r r4">:</div>
+    <div class="cd-block r r4">
+      <div class="cd-num" id="cd-secs">00</div>
+      <div class="cd-unit">Segundos</div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTION HEADER -->
+<div class="col-header" id="colecao">
+  <div class="r">
+    <div class="col-label">☽ Drop 001 · Edição Limitada ☽</div>
+    <div class="col-title">Mermaid<br><em>Collection</em></div>
+  </div>
+  <div class="col-meta r r2">
+    <div class="col-meta-num">001</div>
+    <div class="col-meta-tag">☽ 5 Peças · Limitado ☽</div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<div class="products">
+  <div class="prod-grid-featured">
+    <div class="prod-card wide r" style="aspect-ratio:16/9;">
+      <span class="prod-num">01 ·</span>
+      <img src="./images/tshirt5.png" alt="T-Shirt Sardinha">
+      <div class="prod-card-info">
+        <div class="prod-cat">☽ T-Shirt</div>
+        <div class="prod-name">T-Shirt Sardinha</div>
+        <div class="prod-sizes">
+          <button class="sz" onclick="selSize(this)">P</button>
+          <button class="sz" onclick="selSize(this)">M</button>
+          <button class="sz" onclick="selSize(this)">G</button>
+          <button class="sz" onclick="selSize(this)">GG</button>
+          <button class="sz" onclick="selSize(this)">XG</button>
+        </div>
+        <div class="prod-footer-row">
+          <span class="prod-price">R$ 189,00</span>
+          <a class="prod-buy" href="./tshirt.html" onclick="return true",'R$ 189,00','sized')" href="#">Leva, Chapa</a>
+        </div>
+      </div>
+    </div>
+    <div class="prod-card r r2">
+      <span class="prod-num">02 ·</span>
+      <img src="./images/short3.png" alt="Shorts MC">
+      <div class="prod-card-info">
+        <div class="prod-cat">☽ Shorts</div>
+        <div class="prod-name">Shorts MC</div>
+        <div class="prod-sizes">
+          <button class="sz" onclick="selSize(this)">P</button>
+          <button class="sz" onclick="selSize(this)">M</button>
+          <button class="sz" onclick="selSize(this)">G</button>
+          <button class="sz" onclick="selSize(this)">GG</button>
+          <button class="sz" onclick="selSize(this)">XG</button>
+        </div>
+        <div class="prod-footer-row">
+          <span class="prod-price">R$ 149,00</span>
+          <a class="prod-buy" onclick="openModal('Shorts MC','R$ 149,00','sized')" href="#">Leva, Chapa</a>
+        </div>
+      </div>
+    </div>
+    <div class="prod-card r r3">
+      <span class="prod-num">03 ·</span>
+      <img src="./images/cap2.png" alt="Cap 5-Panel">
+      <div class="prod-card-info">
+        <div class="prod-cat">☽ Headwear</div>
+        <div class="prod-name">Cap 5-Panel</div>
+        <div class="prod-sizes">
+          <button class="sz uno" onclick="selSize(this)">One Size</button>
+        </div>
+        <div class="prod-footer-row">
+          <span class="prod-price">R$ 99,00</span>
+          <a class="prod-buy" onclick="openModal('Cap 5-Panel','R$ 99,00','uno')" href="#">Leva, Chapa</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="prod-grid">
+    <div class="prod-card r">
+      <span class="prod-num">04 ·</span>
+      <img src="./images/meia2.png" alt="Meias MC">
+      <div class="prod-card-info">
+        <div class="prod-cat">☽ Acessórios</div>
+        <div class="prod-name">Meias MC</div>
+        <div class="prod-sizes">
+          <button class="sz uno" onclick="selSize(this)">Único</button>
+        </div>
+        <div class="prod-footer-row">
+          <span class="prod-price">R$ 49,00</span>
+          <a class="prod-buy" onclick="openModal('Meias MC — Pack 2 pares','R$ 49,00','uno')" href="#">Leva, Chapa</a>
+        </div>
+      </div>
+    </div>
+    <div class="prod-card r r2">
+      <span class="prod-num">05 ·</span>
+      <img src="./images/bag2.png" alt="Tote Bag">
+      <div class="prod-card-info">
+        <div class="prod-cat">☽ Acessórios</div>
+        <div class="prod-name">Tote Bag</div>
+        <div class="prod-sizes">
+          <button class="sz uno" onclick="selSize(this)">Único</button>
+        </div>
+        <div class="prod-footer-row">
+          <span class="prod-price">R$ 79,00</span>
+          <a class="prod-buy" onclick="openModal('Tote Bag','R$ 79,00','uno')" href="#">Leva, Chapa</a>
+        </div>
+      </div>
+    </div>
+    <div class="prod-card r r3" style="background:var(--green);">
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:40px;text-align:center;gap:20px;">
+        <div style="font-family:'Permanent Marker',cursive;font-size:48px;color:rgba(157,200,50,.15);">MC</div>
+        <div style="font-family:'VT323',monospace;font-size:16px;letter-spacing:5px;color:var(--lime);text-transform:uppercase;">Kit do Chapa</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(240,234,214,.45);line-height:1.6;">T-Shirt + Shorts + Cap + Meias + Bag</div>
+        <div style="font-family:'Black Ops One',cursive;font-size:28px;color:var(--gold);">R$ 489,00</div>
+        <a class="prod-buy" style="padding:12px 32px;font-size:11px;" onclick="openModal('Kit do Chapa Completo','R$ 489,00','kit')" href="#">Montar Kit</a>
+      </div>
+    </div>
+    <div class="prod-card r r4" style="background:var(--mid);">
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:12px;">
+        <div style="font-family:'Permanent Marker',cursive;font-size:56px;color:rgba(157,200,50,.07);">?</div>
+        <div style="font-family:'VT323',monospace;font-size:14px;letter-spacing:5px;color:rgba(157,200,50,.25);text-transform:uppercase;">Drop 002</div>
+        <div style="font-family:'VT323',monospace;font-size:12px;letter-spacing:3px;color:rgba(240,234,214,.15);text-transform:uppercase;">Em breve</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="texugo-wrap r">
+    <img src="./images/texugo.png" alt="E aí, Meu Chapa?" class="texugo-img">
+    <div class="texugo-bubble">E aí, meu chapa? 👋</div>
+  </div>
+  <div class="manifesto-q r r2">
+    "Aparece do nada.<br>Fica à vontade.<br>
+    <strong>E aí, Meu Chapa?</strong>"
+  </div>
+  <div class="manifesto-by r r3">— Rio de Janeiro · 2026</div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="sobre">
+  <div class="about-visual">
+    <img src="./images/tshirt4.png" alt="Meu Chapa">
+    <div class="about-visual-overlay"></div>
+    <div class="stk stk-1">100% Carioca 🌴</div>
+    <div class="stk stk-2">Drop 001</div>
+    <div class="stk stk-3">Edição Limitada ✺</div>
+  </div>
+  <div class="about-text">
+    <div class="col-label r">☽ A Marca ☽</div>
+    <div class="col-title r r2">Relaxa,<br>Meu <em>Chapa</em></div>
+    <p class="about-body r r3">
+      <strong>Meu Chapa</strong> nasceu no Rio. Sem filtro, sem frescura. Uma marca que aparece do nada e fica à vontade em qualquer lugar — do skate à madrugada, do calçadão à quebrada. Cada peça é <strong>edição limitada</strong> porque raridade tem valor.
+    </p>
+    <div class="about-tags r r4">
+      <div class="atag">☽ Skate</div>
+      <div class="atag">☽ Rio</div>
+      <div class="atag">☽ Street</div>
+      <div class="atag">☽ Cultura</div>
+      <div class="atag">☽ 420</div>
+      <div class="atag">☽ Limited</div>
+    </div>
+  </div>
+</section>
+
+<!-- LOOKBOOK -->
+<section class="lookbook" id="lookbook">
+  <div class="look-header r">
+    <div class="col-label">☽ Lookbook ☽</div>
+    <div class="col-title">Os Looks</div>
+  </div>
+  <div class="look-grid">
+    <div class="look-card tall r" style="min-height:600px;">
+      <img src="./images/tshirt6.png" alt="">
+      <div class="look-label">☽ Lifestyle · Rio</div>
+    </div>
+    <div class="look-card r r2" style="aspect-ratio:1;">
+      <img src="./images/bag5.png" alt="">
+      <div class="look-label">☽ Tote Bag</div>
+    </div>
+    <div class="look-card r r3" style="aspect-ratio:1;">
+      <img src="./images/meia3.png" alt="">
+      <div class="look-label">☽ Meias MC</div>
+    </div>
+    <div class="look-card tall r r4" style="min-height:600px;">
+      <img src="./images/short6.png" alt="">
+      <div class="look-label">☽ Shorts · Editorial</div>
+    </div>
+    <div class="look-card r" style="aspect-ratio:1;">
+      <img src="./images/cap4.png" alt="">
+      <div class="look-label">☽ Cap 5-Panel</div>
+    </div>
+    <div class="look-card r r2" style="aspect-ratio:1;">
+      <img src="./images/tshirt2.png" alt="">
+      <div class="look-label">☽ T-Shirt Sardinha</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="look-header r">
+    <div class="col-label">☽ Dúvidas ☽</div>
+    <div class="col-title">FAQ</div>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item r">
+      <button class="faq-q" onclick="toggleFaq(this)">Como funciona o pedido? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Simples — escolhe o produto, clica em "Leva, Chapa", seleciona o tamanho e vai direto pro nosso WhatsApp. A gente confirma o pedido, combina o pagamento e envia. Fácil assim.</div></div>
+    </div>
+    <div class="faq-item r r2">
+      <button class="faq-q" onclick="toggleFaq(this)">Quais formas de pagamento? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">PIX (chave: +55 21 97309-4704) ou Mercado Pago. Para pedidos via WhatsApp combinamos tudo diretamente. Em breve cartão de crédito direto no site.</div></div>
+    </div>
+    <div class="faq-item r r3">
+      <button class="faq-q" onclick="toggleFaq(this)">Qual o prazo de entrega? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Enviamos pelos Correios em até 2 dias úteis após confirmação do pagamento. O prazo de entrega varia conforme sua região — em média 3 a 7 dias úteis.</div></div>
+    </div>
+    <div class="faq-item r r4">
+      <button class="faq-q" onclick="toggleFaq(this)">Posso trocar o tamanho? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Sim! Aceitamos troca em até 7 dias após o recebimento, desde que a peça esteja sem uso e com a etiqueta. Fala com a gente no WhatsApp ou pelo contato@meuchapa.com.</div></div>
+    </div>
+    <div class="faq-item r r4">
+      <button class="faq-q" onclick="toggleFaq(this)">O estoque é realmente limitado? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Sim, chapa. O Drop 001 tem unidades contadas por tamanho. Quando acabar, acabou — não tem reposição. É edição limitada de verdade.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter" id="contato">
+  <div class="nl-eyebrow r">☽ Fique Sabendo ☽</div>
+  <div class="nl-title r r2">Próximo<br><em>Drop</em></div>
+  <p class="nl-sub r r3">Tipo o Texugo — fica sabendo antes de todo mundo.</p>
+  <div class="nl-form r r4">
+    <input class="nl-input" type="email" placeholder="seu@email.com">
+    <button class="nl-btn">Entrar</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo r">Meu <em>Chapa</em></div>
+  <ul class="footer-links r r2">
+    <li><a href="https://www.instagram.com/meuchapa_original" target="_blank">Instagram</a></li>
+    <li><a href="https://wa.me/5521973094704" target="_blank">WhatsApp</a></li>
+    <li><a href="#">Trocas</a></li>
+    <li><a href="#">Política</a></li>
+  </ul>
+  <div class="footer-right r r3">
+    <div class="footer-copy">© 2026 · Meu Chapa</div>
+    <div class="footer-made">meuchapaoriginal.com · Rio de Janeiro</div>
+  </div>
+</footer>
+
+<!-- WA FLOAT -->
+<a class="wa-float" href="https://wa.me/5521973094704" target="_blank" title="Falar no WhatsApp">
+  <div class="wa-float-pulse"></div>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#colecao" onclick="closeMobile()">Coleção</a>
+  <a href="#lookbook" onclick="closeMobile()">Lookbook</a>
+  <a href="#sobre" onclick="closeMobile()">Sobre</a>
+  <a href="#contato" onclick="closeMobile()">Contato</a>
+  <a href="https://www.instagram.com/meuchapa_original" target="_blank">Instagram</a>
+  <a href="https://wa.me/5521973094704" target="_blank">WhatsApp</a>
+</div>
+
+<!-- NEWSLETTER POPUP -->
+<div class="nl-popup" id="nlPopup">
+  <div class="nl-popup-box">
+    <button class="nl-popup-close" onclick="closePopup()">✕</button>
+    <img class="nl-popup-texugo" src="./images/texugo.png" alt="Meu Chapa">
+    <div class="nl-popup-title">E aí, <em>Chapa!</em></div>
+    <p class="nl-popup-sub">Entra na lista e fica sabendo do Drop 002 antes de todo mundo. Tipo o Texugo.</p>
+    <div class="nl-popup-form">
+      <input class="nl-popup-input" type="email" placeholder="seu@email.com">
+      <button class="nl-popup-btn" onclick="closePopup()">Quero Saber Primeiro</button>
+    </div>
+    <button class="nl-popup-skip" onclick="closePopup()">Agora não, obrigado</button>
+  </div>
+</div>
+
+<!-- MODAL MEDIDAS -->
+<div class="modal-overlay" id="modalMedidas" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal" style="max-width:520px;">
+    <button class="modal-close" onclick="document.getElementById('modalMedidas').classList.remove('open')">✕</button>
+    <div class="modal-label">☽ Tabela de Medidas</div>
+    <div class="modal-name" style="font-size:20px;margin-bottom:20px;">Guia de Tamanhos</div>
+    <div class="modal-tabs">
+      <button class="modal-tab active" onclick="switchTab(this,'tab-tshirt')">T-Shirt</button>
+      <button class="modal-tab" onclick="switchTab(this,'tab-shorts')">Shorts</button>
+      <button class="modal-tab" onclick="switchTab(this,'tab-meias')">Meias</button>
+    </div>
+    <div id="tab-tshirt">
+      <table class="medidas-table">
+        <tr><th>Tam</th><th>Largura</th><th>Comprimento</th><th>Manga</th></tr>
+        <tr><td>P</td><td>54 cm</td><td>70 cm</td><td>22 cm</td></tr>
+        <tr><td>M</td><td>58 cm</td><td>73 cm</td><td>23 cm</td></tr>
+        <tr><td>G</td><td>62 cm</td><td>76 cm</td><td>24 cm</td></tr>
+        <tr><td>GG</td><td>66 cm</td><td>79 cm</td><td>25 cm</td></tr>
+        <tr><td>XG</td><td>70 cm</td><td>82 cm</td><td>26 cm</td></tr>
+      </table>
+      <p class="medidas-note">Medidas da peça. Modelo usa tamanho G. Fit oversized — se preferir mais justo, peça um tamanho menor.</p>
+    </div>
+    <div id="tab-shorts" style="display:none;">
+      <table class="medidas-table">
+        <tr><th>Tam</th><th>Cós</th><th>Comprimento</th></tr>
+        <tr><td>P</td><td>38-40 cm</td><td>48 cm</td></tr>
+        <tr><td>M</td><td>42-44 cm</td><td>50 cm</td></tr>
+        <tr><td>G</td><td>46-48 cm</td><td>52 cm</td></tr>
+        <tr><td>GG</td><td>50-52 cm</td><td>54 cm</td></tr>
+        <tr><td>XG</td><td>54-56 cm</td><td>56 cm</td></tr>
+      </table>
+      <p class="medidas-note">Cós elástico com cordão. Fit relaxed oversized.</p>
+    </div>
+    <div id="tab-meias" style="display:none;">
+      <table class="medidas-table">
+        <tr><th>Tam</th><th>Numeração</th></tr>
+        <tr><td>Único</td><td>35 a 44</td></tr>
+      </table>
+      <p class="medidas-note">Tamanho único. Alta elasticidade. Cano alto.</p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PRODUTO + PIX + WA -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('modal').classList.remove('open')">✕</button>
+    <div class="modal-label" id="modal-cat">☽ Produto</div>
+    <div class="modal-name" id="modal-name">Nome</div>
+    <div class="modal-price" id="modal-price">R$ 0,00</div>
+    <div id="modal-size-section">
+      <div class="modal-size-label">Escolhe o tamanho: <button class="medidas-link" onclick="document.getElementById('modal').classList.remove('open');document.getElementById('modalMedidas').classList.add('open')">Ver tabela de medidas →</button></div>
+      <div class="modal-sizes" id="modal-sizes"></div>
+    </div>
+    <!-- PIX -->
+    <div class="pix-box">
+      <div class="pix-label">☽ Pagar via PIX</div>
+      <div class="pix-key" id="pix-key">+55 21 97309-4704</div>
+      <div class="pix-note" id="pix-amount">Valor: —</div>
+      <button class="pix-copy" onclick="copyPix()">Copiar Chave PIX</button>
+      <div class="pix-note">Após o pagamento, envie o comprovante no WhatsApp para confirmar o pedido.</div>
+    </div>
+    <div class="modal-divider">ou</div>
+    <a class="modal-wa" id="modal-wa-btn" href="#" target="_blank">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Pedir pelo WhatsApp
+    </a>
+  </div>
+</div>
+
+<script>
+const WA = '5521973094704';
+const PIX = '+55 21 97309-4704';
+
+// ═ PRODUCT GALLERY ═
+function switchImg(imgId, src, thumb) {
+  document.getElementById(imgId).src = src;
+  thumb.closest('.pd-thumbs').querySelectorAll('.pd-thumb').forEach(t => t.classList.remove('active'));
+  thumb.classList.add('active');
+}
+
+// ═ HAMBURGER ═
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+function closeMobile() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+}
+
+// ═ COUNTDOWN — 7 dias ═
+const endDate = new Date();
+endDate.setDate(endDate.getDate() + 7);
+function updateCountdown() {
+  const now = new Date();
+  const diff = endDate - now;
+  if (diff <= 0) {
+    document.getElementById('cd-days').textContent = '00';
+    document.getElementById('cd-hours').textContent = '00';
+    document.getElementById('cd-mins').textContent = '00';
+    document.getElementById('cd-secs').textContent = '00';
+    return;
+  }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ═ NEWSLETTER POPUP — aparece após 8s ═
+setTimeout(() => {
+  if (!localStorage.getItem('mc_popup')) {
+    document.getElementById('nlPopup').classList.add('open');
+  }
+}, 8000);
+function closePopup() {
+  document.getElementById('nlPopup').classList.remove('open');
+  localStorage.setItem('mc_popup', '1');
+}
+
+// ═ MODAL PRODUTO ═
+let currentPrice = '';
+function openModal(name, price, type) {
+  currentPrice = price;
+  document.getElementById('modal-name').textContent = name;
+  document.getElementById('modal-price').textContent = price;
+  document.getElementById('pix-amount').textContent = 'Valor: ' + price;
+  const sizesEl = document.getElementById('modal-sizes');
+  const sizeSection = document.getElementById('modal-size-section');
+  sizesEl.innerHTML = '';
+  if (type === 'sized' || type === 'kit') {
+    sizeSection.style.display = 'block';
+    if (type === 'kit') document.querySelector('#modal-size-section .modal-size-label').innerHTML = 'Tamanho da T-Shirt e Shorts: <button class="medidas-link" onclick="document.getElementById(\'modal\').classList.remove(\'open\');document.getElementById(\'modalMedidas\').classList.add(\'open\')">Ver tabela →</button>';
+    ['P','M','G','GG','XG'].forEach(s => {
+      const b = document.createElement('button');
+      b.className = 'msz'; b.textContent = s;
+      b.onclick = () => {
+        document.querySelectorAll('.msz').forEach(x => x.classList.remove('sel'));
+        b.classList.add('sel');
+        updateWALink(name, price, s);
+      };
+      sizesEl.appendChild(b);
+    });
+    document.getElementById('modal-wa-btn').onclick = (e) => {
+      if (!document.querySelector('.msz.sel')) { e.preventDefault(); alert('Escolhe o tamanho primeiro, chapa! 👆'); }
+    };
+  } else {
+    sizeSection.style.display = 'none';
+    updateWALink(name, price, 'Único');
+  }
+  document.getElementById('modal').classList.add('open');
+  return false;
+}
+
+function updateWALink(name, price, size) {
+  const msg = `Oi! Quero pedir:\n\n*${name}*\nTamanho: ${size}\nPreço: ${price}\n\nMermaid Collection — Drop 001 🐟`;
+  document.getElementById('modal-wa-btn').href = `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+}
+
+function closeModal(e) {
+  if (e.target.id === 'modal') document.getElementById('modal').classList.remove('open');
+}
+
+function copyPix() {
+  navigator.clipboard.writeText(PIX).then(() => {
+    const btn = document.querySelector('.pix-copy');
+    btn.textContent = 'Copiado! ✓';
+    btn.style.background = '#1ebe5a';
+    setTimeout(() => { btn.textContent = 'Copiar Chave PIX'; btn.style.background = ''; }, 2000);
+  });
+}
+
+function selSize(btn) {
+  btn.parentElement.querySelectorAll('.sz').forEach(s => s.classList.remove('sel'));
+  btn.classList.add('sel');
+}
+
+// ═ TABELA MEDIDAS ═
+function switchTab(btn, tabId) {
+  document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  ['tab-tshirt','tab-shorts','tab-meias'].forEach(id => {
+    document.getElementById(id).style.display = id === tabId ? 'block' : 'none';
+  });
+}
+
+// ═ FAQ ═
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// ═ HERO SLIDER ═
+let current = 0;
+const slides = document.querySelectorAll('.hero-slide');
+const dots = document.querySelectorAll('.hero-dot');
+function goTo(i) {
+  slides[current].classList.remove('active');
+  dots[current].classList.remove('active');
+  current = (i + slides.length) % slides.length;
+  slides[current].classList.add('active');
+  dots[current].classList.add('active');
+}
+dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.slide)));
+let timer = setInterval(() => goTo(current + 1), 6000);
+const heroEl = document.querySelector('.hero');
+heroEl.addEventListener('mouseenter', () => clearInterval(timer));
+heroEl.addEventListener('mouseleave', () => { timer = setInterval(() => goTo(current + 1), 6000); });
+
+// ═ SCROLL REVEAL ═
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
+}, { threshold: .08 });
+document.querySelectorAll('.r').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
